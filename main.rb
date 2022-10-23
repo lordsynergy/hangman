@@ -1,4 +1,4 @@
-if (Gem.win_platform?)
+if Gem.win_platform?
   Encoding.default_external = Encoding.find(Encoding.locale_charmap)
   Encoding.default_internal = __ENCODING__
 
@@ -7,14 +7,14 @@ if (Gem.win_platform?)
   end
 end
 
-require_relative 'lib/console_interface'
-require_relative 'lib/game'
+require_relative "lib/console_interface"
+require_relative "lib/game"
 
 # 1. Поздороваться
 puts "Всем привет!"
 
 # 2. Загрузить случайное слово из файла
-word = File.readlines(__dir__ + '/data/words.txt', encoding: 'UTF-8', chomp: true).sample
+word = File.readlines("#{__dir__}/data/words.txt", encoding: "UTF-8", chomp: true).sample
 game = Game.new(word)
 console_interface = ConsoleInterface.new(game)
 

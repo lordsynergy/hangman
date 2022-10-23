@@ -2,13 +2,8 @@ class Game
   # Количество допустимых ошибок
   TOTAL_ERRORS_ALLOWED = 7
 
-  # Конструктор класса Game на вход получает строку с загаданным словом.
-  #
-  # В конструкторе инициализируем две переменные экземпляра: массив букв
-  # загаданного слова и пустой массив для дальнейшего сбора в него вводимых
-  # букв.
   def initialize(word)
-    @letters = word.chars
+    @letters = word.upcase.chars
     @user_guesses = []
   end
 
@@ -33,15 +28,11 @@ class Game
   # массиве на соответствующем месте находится nil. Этот массив нужен методу
   # экземпляра класса ConsoleInterface для вывода слова на игровом табло.
   def letters_to_guess
-    result =
-      @letters.map do |letter|
-        if @user_guesses.include?(normalize_letter(letter))
-          letter
-        else
-          nil
-        end
+    @letters.map do |letter|
+      if @user_guesses.include?(normalize_letter(letter))
+        letter
       end
-    result
+    end
   end
 
   # Возвращает true, если у пользователя не осталось ошибок, т.е. игра проиграна
@@ -78,6 +69,7 @@ class Game
 
   private
 
+  # Возвращаем буквы Е, И если пользователь ввел буквы Ё, Й
   def normalize_letter(letter)
     return "Е" if letter == "Ё"
     return "И" if letter == "Й"
