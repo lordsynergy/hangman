@@ -9,6 +9,7 @@ end
 
 require_relative "lib/console_interface"
 require_relative "lib/game"
+require 'colorize'
 
 # 1. Поздороваться
 puts "Всем привет!"
